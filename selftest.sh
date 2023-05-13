@@ -1,2 +1,3 @@
 #!/bin/sh
-docker build -t selftest .
+echo "run selftest"
+python3 selftest.py
