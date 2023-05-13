@@ -1,3 +1,3 @@
 #!/bin/sh
 echo "run selftest"
-python3 selftest.py
+python selftest.py
