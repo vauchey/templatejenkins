@@ -6,4 +6,5 @@ whoami
 ls
 pwd
 py.test --junitxml results.xml selftest.py
+ls
 #python3 
