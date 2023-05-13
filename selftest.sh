@@ -4,4 +4,5 @@ cd /home/user
 whoami
 ls
 pwd
-python3 selftest.py
+py.test --junitxml results.xml selftest.py
+#python3 
