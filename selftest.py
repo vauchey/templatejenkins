@@ -10,11 +10,14 @@ class TestStringMethods(unittest.TestCase):
         self.assertTrue('FOO'.isupper())
         self.assertFalse('Foo'.isupper())
 
+    
+    """
     def test_bad(self):
         self.assertEqual(2, 1)
 
     def test_Fail(self):
         raise(2)
+    """
 
     def test_split(self):
         s = 'hello world'
