@@ -1,6 +1,7 @@
 #!/bin/sh
 echo "run selftest"
 cd /home/user
+sudo chown -R user /home/user
 whoami
 ls
 pwd
