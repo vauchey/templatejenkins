@@ -4,7 +4,7 @@ import pytest
 import glob
 import os
 listOfFile=glob.glob("./libs/*.py")
-paramaters = ["--junitxml","results.xml"]
+paramaters = ["--junitxml","results.xml","--capture=no"]
 for i in listOfFile:
     paramaters.append(i)
 print ("run tests with parameters ="+str(paramaters))
