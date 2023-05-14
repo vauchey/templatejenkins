@@ -8,3 +8,4 @@ pwd
 py.test --junitxml results.xml selftest.py
 ls
 #python3 
+#je fait un docker (environement minimal, puis je lance un pip install requirement dans un venv et lance le test)
