@@ -103,6 +103,8 @@ class HarucoDetect:
         return image,idTxyzrpyList
     
 class ArucoTest(unittest.TestCase):
+    def test_instanciate(self):
+        harucoDetect = HarucoDetect()
 
     def test_detect(self):
 
@@ -128,7 +130,7 @@ class ArucoTest(unittest.TestCase):
         markerImage28= cv2.aruco.generateImageMarker(aruco_dict, 28, 200, 1)
         blank_image[100:300,100:300]=markerImage28
         image,distancedxyzrpy = harucoDetect.processImage(blank_image,arucoSize,mtx,dist, idList=[23,28])
-        self.assertEqual(distancedxyzrpy[0][0], 28)#check detection
+        self.assertEqual(distancedxyzrpy[0][0], 29)#check detection
 
 
 if __name__ =='__main__':
