@@ -15,6 +15,7 @@ RUN apt-get install -y sudo
 RUN apt-get install -y wget 
 RUN apt-get install -y nano
 RUN apt-get install -y python3-pip
+RUN apt-get install -y libgl1-mesa-glx
 RUN pip install pytest
 #RUN apt-get install -y build-essential --fix-missing
 
