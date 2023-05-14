@@ -22,6 +22,7 @@ RUN apt-get install -y libgl1
 RUN apt-get install -y libglib2.0-0
 RUN pip install pytest
 
+RUN pip install -r ./requirement.txt
 
 RUN adduser user
 RUN adduser user sudo
