@@ -12,14 +12,13 @@ RUN apt-get install -y sudo
 #RUN apt-get install -y gedit 
 #RUN apt-get install -y lsb-release 
 #RUN apt-get install -y lsb-core 
+RUN apt-get install -y build-essential --fix-missing
 RUN apt-get install -y wget 
 RUN apt-get install -y nano
 RUN apt-get install -y python3-pip
-RUN apt-get update
-RUN apt-get -y upgrade
 RUN apt-get install -y libgl1
 RUN pip install pytest
-#RUN apt-get install -y build-essential --fix-missing
+
 
 RUN adduser user
 RUN adduser user sudo
