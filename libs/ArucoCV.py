@@ -17,6 +17,11 @@ class HarucoDetect:
         else:
             self.aruco_dict = aruco_dict
 
+        try :
+            parameters =  cv2.aruco.DetectorParameters()
+            self.detector = cv2.aruco.ArucoDetector(self.aruco_dict, parameters)
+        except :
+            self.detector = None
         #markerImage= cv2.aruco.generateImageMarker(self.aruco_dict, 23, 200, 1)
         #cv2.imwrite("marker23.png", markerImage);
 
@@ -32,7 +37,10 @@ class HarucoDetect:
 
         idTxyzrpyList=[]#txyz=[0.0,0.0,0.0]
         #corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, aruco_dict, parameters=self.parameters)
-        corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, self.aruco_dict)
+        if  self.detector is not None :
+            corners, ids, rejectedImgPoints = self.detector.detectMarkers(gray)
+        else:
+            corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, self.aruco_dict)
 
         rvec, tvec ,_ = cv2.aruco.estimatePoseSingleMarkers(corners, arucoSize, mtx, dist)
         print ("ids="+str(ids))
