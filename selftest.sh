@@ -6,6 +6,7 @@ whoami
 ls
 pwd
 #py.test --junitxml results.xml selftest.py
+pip install -r requirements.txt
 python3 selftest.py
 ls
 #python3 
