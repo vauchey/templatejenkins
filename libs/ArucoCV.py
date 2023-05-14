@@ -27,6 +27,31 @@ class HarucoDetect:
 
         pass
 
+    def my_estimatePoseSingleMarkers(self,corners, marker_size, mtx, distortion):
+        '''
+        This will estimate the rvec and tvec for each of the marker corners detected by:
+        corners, ids, rejectedImgPoints = detector.detectMarkers(image)
+        corners - is an array of detected corners for each detected marker in the image
+        marker_size - is the size of the detected markers
+        mtx - is the camera matrix
+        distortion - is the camera distortion matrix
+        RETURN list of rvecs, tvecs, and trash (so that it corresponds to the old estimatePoseSingleMarkers())
+        '''
+        marker_points = np.array([[-marker_size / 2, marker_size / 2, 0],
+                                [marker_size / 2, marker_size / 2, 0],
+                                [marker_size / 2, -marker_size / 2, 0],
+                                [-marker_size / 2, -marker_size / 2, 0]], dtype=np.float32)
+        trash = []
+        rvecs = []
+        tvecs = []
+        i = 0
+        for c in corners:
+            nada, R, t = cv2.solvePnP(marker_points, corners[i], mtx, distortion, False, cv2.SOLVEPNP_IPPE_SQUARE)
+            rvecs.append(R)
+            tvecs.append(t)
+            trash.append(nada)
+        return rvecs, tvecs, trash
+   
     def processImage(self,image,arucoSize,mtx,dist,idList=[23]):
 
         print ("image.shape="+str(image.shape))
@@ -42,16 +67,18 @@ class HarucoDetect:
         else:
             corners, ids, rejectedImgPoints = cv2.aruco.detectMarkers(gray, self.aruco_dict)
 
-        rvec, tvec ,_ = cv2.aruco.estimatePoseSingleMarkers(corners, arucoSize, mtx, dist)
+        #rvec, tvec ,_ = cv2.aruco.estimatePoseSingleMarkers(corners, arucoSize, mtx, dist)
+        rvec, tvec ,_ = self.my_estimatePoseSingleMarkers(corners, arucoSize, mtx, dist)#new function wich use solvpnp
+        #_,rvec, tvec , = cv2.solvePnP(corners, arucoSize, mtx, dist)
         print ("ids="+str(ids))
         if np.all(ids != None):
             for i in np.arange(len(ids)):
                 print ("ids[i][0] =========="+str(ids[i][0] ))
                 if ids[i][0] in idList:
-                    logging.info(f'{ids[i][0]},  {tvec[i][0][0]}, {tvec[i][0][1]}, {tvec[i][0][2]}  ,  {rvec[i][0][0]}, {rvec[i][0][1]}, {rvec[i][0][2]}')
+                    #logging.info(f'{ids[i][0]},  {tvec[i][0][0]}, {tvec[i][0][1]}, {tvec[i][0][2]}  ,  {rvec[i][0][0]}, {rvec[i][0][1]}, {rvec[i][0][2]}')
 
-                    currentRvec=rvec[i][0][0:3]
-                    currentTVec=tvec[i][0][0:3]
+                    currentRvec=rvec[i][0:3]#rvec[i][0][0:3]
+                    currentTVec=tvec[i][0:3]#tvec[i][0][0:3]
                     #print ("currentRvec="+str(currentRvec))
                     # ("currentTVec="+str(currentTVec))
                     Hrot=cv2.Rodrigues(currentRvec)[0]
@@ -133,12 +160,13 @@ class ArucoTest(unittest.TestCase):
         blank_image[100:300,100:300]=markerImage23
         image,distancedxyzrpy = harucoDetect.processImage(blank_image,arucoSize,mtx,dist, idList=[23,28])
         print ("distancedxyzrpy="+str(distancedxyzrpy))
+        self.assertEqual(distancedxyzrpy[0][1], 0.64)#check position
         self.assertEqual(distancedxyzrpy[0][0], 23)#check detection
 
         markerImage28= cv2.aruco.generateImageMarker(aruco_dict, 28, 200, 1)
         blank_image[100:300,100:300]=markerImage28
         image,distancedxyzrpy = harucoDetect.processImage(blank_image,arucoSize,mtx,dist, idList=[23,28])
-        self.assertEqual(distancedxyzrpy[0][0], 29)#check detection
+        self.assertEqual(distancedxyzrpy[0][0], 28)#check detection
 
 
 if __name__ =='__main__':
