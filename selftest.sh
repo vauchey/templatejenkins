@@ -5,7 +5,8 @@ sudo chown -R user /home/user
 whoami
 ls
 pwd
-py.test --junitxml results.xml selftest.py
+#py.test --junitxml results.xml selftest.py
+python selftest.py
 ls
 #python3 
 #je fait un docker (environement minimal, puis je lance un pip install requirement dans un venv et lance le test)
