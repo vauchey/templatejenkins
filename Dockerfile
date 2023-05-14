@@ -16,7 +16,10 @@ RUN apt-get install -y build-essential --fix-missing
 RUN apt-get install -y wget 
 RUN apt-get install -y nano
 RUN apt-get install -y python3-pip
+
+#opencv
 RUN apt-get install -y libgl1
+RUN apt-get install -y libglib2.0-0
 RUN pip install pytest
 
 
