@@ -6,7 +6,7 @@ whoami
 ls
 pwd
 #py.test --junitxml results.xml selftest.py
-python selftest.py
+python3 selftest.py
 ls
 #python3 
 #je fait un docker (environement minimal, puis je lance un pip install requirement dans un venv et lance le test)
