@@ -21,7 +21,8 @@ RUN apt-get install -y python3-pip
 RUN apt-get install -y libgl1
 RUN apt-get install -y libglib2.0-0
 RUN pip install pytest
-
+#display
+RUN apt-get install qt5-default
 
 
 RUN adduser user
