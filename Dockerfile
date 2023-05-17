@@ -22,6 +22,7 @@ RUN apt-get install -y libgl1
 RUN apt-get install -y libglib2.0-0
 RUN pip install pytest
 #display
+RUN apt-get update
 RUN apt-get install -y qt5-default
 
 
