@@ -139,7 +139,7 @@ class HarucoDetect:
     
 class ArucoTest(unittest.TestCase):
 
-    def test_mageshow(self)
+    def test_imagecreate(self):
         
         aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_4X4_1000)
         for i in range (10)
