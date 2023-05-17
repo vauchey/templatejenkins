@@ -142,11 +142,11 @@ class ArucoTest(unittest.TestCase):
     def test_imagecreate(self):
         
         aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_4X4_1000)
-        for i in range (10):
+        for i in range (999):
             markerImageXX= cv2.aruco.generateImageMarker(aruco_dict, i, 200, 1)
             cv2.imshow('OpenCV', markerImageXX)
             key = cv2.waitKey(10)
-            cv2.imwrite("./image"+str(i)+".png", markerImageXX)
+            #cv2.imwrite("./image"+str(i)+".png", markerImageXX)
 
     def test_instanciate(self):
         harucoDetect = HarucoDetect()
